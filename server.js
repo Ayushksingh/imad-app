@@ -5,7 +5,9 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var articleOne = {
+var articles =
+{
+    'article-one' : {
   title: 'Article 1 | Ayush Kumar',
   heading: 'Article 1',
   date: '19th August 2017',
@@ -16,8 +18,32 @@ var articleOne = {
     <p>
             I actually am very happy that i am able to do all this, Damn  this is FUN!
     </p>`
+},
+    'article-two' : {
+        title: 'Article 2 | Ayush Kumar',
+  heading: 'Article 2',
+  date: '20th August 2017',
+  content: `
+  <p>
+         This is my second article and i am happy to launch it!
+    </p>
+    <p>
+            I actually am very happy that i am able to do all this, Damn  this is FUN!
+    </p>`
+    },
+    'article-three' : {
+        title: 'Article 3 | Ayush Kumar',
+  heading: 'Article 3',
+  date: '21st August 2017',
+  content: `
+  <p>
+         This is my Third article and i am happy to launch it!
+    </p>
+    <p>
+            I actually am very happy that i am able to do all this, Damn  this is FUN!
+    </p>`
+    }
 };
-
 function createTable(data)
 {
 var title=data.title;
@@ -61,8 +87,11 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/article-one', function (req,res) {
-  res.send(createTable(articleOne));
+app.get('/:articleName', function (req,res) {
+  //articleName == article-one
+  //articles[articleName] == {} content object for article one
+  var articleName = req.params.articleName;
+  res.send(createTable(articles[articleName]));
 });
 
 app.get('/article-two', function (req,res) {
