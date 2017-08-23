@@ -7,5 +7,5 @@ console.log('Loaded!');
   //move the image
   var img = document.getElementById('Ayush');
   img.onclick = function () {
-      ing.style.marginLeft = '100px';
+      img.style.marginLeft = '100px';
   };
